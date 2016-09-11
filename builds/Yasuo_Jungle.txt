@@ -1,0 +1,9 @@
+Summoner Spells: Flash Smite
+	Runes : 9x Crit Chance Reds, 9x Armor Yellows, 9x Mr Blues, 3x Quint of Attack Speed
+	Start : Hunter's Machete , 3 Health pots
+	First Back: Stalker's Blade, Hunter's Potion
+	Rush: Stalker's Blade - warrior + Statikk Shiv
+	Core Items:  Stalker's Blade - warrior + Statikk Shiv, Death's Dance, Merc Treads or Ninja Tabi
+	Last items: Death's Dance, Dead man's plate, sterak's gage
+	Masteries: 18 6 6 , Warlord's Bloodlust
+	Ability Sequence: Q, E, Q, Q,W ; Max Q , E , W and R whenever avaliable

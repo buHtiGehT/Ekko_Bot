@@ -1,0 +1,22 @@
+Commands (Use "!" and then the name of the Command to execute.)
+Current commands are a work in progress.
+
+IMPORTANT(MUST DO!)-> !botrole - Creates a Role specifically for bot commands called "BotCom", any person with this role will be able to access exclusive commands
+ALL EXCLUSIVE COMMANDS ARE THE FOLLOWING:
+!shutdown - turns off the bot , use this especially if there is a bug 
+
+REGULAR COMMANDS:
+!Commands - displays a list of commands
+!Ekko - returns a random ekko quote to the user
+!bug - if there is a bug, you can use this to report it
+!builds - use this to find a build for a champ
+Current Supported builds:
+- ekko mid, top , jungle
+- yasuo mid, top, jungle
+- riven top, mid, jungle
+- aurelion sol mid, top, jungle
+- vlad mid, top
+- zilean mid, support
+- soraka support
+If there is a build you are looking for but is not listed, just mention it 
+with the !builds command and it will be recorded and eventually added.

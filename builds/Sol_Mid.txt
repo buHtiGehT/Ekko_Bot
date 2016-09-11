@@ -1,0 +1,9 @@
+Summoner Spells: Flash, Ignite; Flash Tp
+	Runes : 9x Magic Pen Reds, 9x Armor Yellows, 3x Ability power 6x scaling MR Blues, 3x AP Quints
+	Start : Doran's Ring, 3 Health pots
+	First Back: Catalyst -> Rod of Ages
+	Rush: Rod of Ages
+	Core Items: Rod of Ages, Liandry's Torment, Rylai's Crystal Scepter
+	Last items: Boots of Swiftness, Abyssal Scepter , Dead man's plate, Rabadon's Death Cap, Void Staff
+	Masteries: 12 18 0 , ThunderLord's Decree
+	Ability Sequence: Start, W, Q, W, E; Max W, Q , E and R whenever avaliable

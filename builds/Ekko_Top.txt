@@ -1,0 +1,9 @@
+Summoner Spells: Flash, Tp
+	Runes : 9x Mr Blues, 9x Armor yellows, 9X attack speed reds, 3x ability power quints
+	Start : Corruption potion; but if your are feeling confident take the Dark Seal and Health pots
+	First Back: Bami's cinder 
+	Rush: Sunfire Cape, Triforce, Merc Treads
+	Core Items: Sunfire cape, triforce, spirit visage
+	Last items: Randuin's omen, dead man's plate, Guardian Angle, Thornmail
+	Masteries: 18 0 12, Fervor; OR 0 18 12, Grasp of the Undyne
+	Ability Sequence: Start Q ; Max Q, E , W and R when ever avaliable

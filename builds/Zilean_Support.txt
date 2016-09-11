@@ -1,0 +1,9 @@
+Summoner Spells: Flash, Exhaust OR Flash Ignite 
+	Runes : 9x Mapic Pen Reds, 9x MR Blues, 9x Armor Yellows, 3x quints of AP
+	Start : SpellTheif's Edge + 3 Health pots
+	First Back: SightStone, Cooldown boots
+	Rush: SightStone, Frost Queen's Claim
+	Core Items: SightStone, Frost Queen's Claim, Locket of the Iron Solari
+	Last items: Zeke's Harbinger, ZzRot or Banshee's veil
+	Masteries: 12 18 0 ThunderLord's Decree ( With CDR Mastery)
+	Ability Sequence: Start Q, W, Q, E; Max Q, E , W and R whenever avaliable

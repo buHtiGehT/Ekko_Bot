@@ -1,0 +1,10 @@
+
+Summoner Spells: Flash, Exhaust, Flash smite
+	Runes : 9x Magic Pen reds, 9x MR bLues, 9x Scaling health yellows, 3x movement speed quint
+	Start : corrupting potion? or hunter's talisman
+	Rush: Stalker's Blade - runic echos or cinder hulk
+	Core Items: Jungle item ^, boots of swiftness, rylai's crystal scepter
+	Last items: hextech glp 800, void staff, rabadon's death cap , Liandry's torment
+	Defensive options: abyssal scepter, banshee's veil, dead man's plate 
+	Masteries: 12 18 0, Stormraider's surge
+	Ability Sequence: Start W, Q, W, E; Max W,Q,E and R when ever avaliable

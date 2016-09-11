@@ -1,0 +1,9 @@
+Summoner Spells: Take Flash And Ignite
+	Runes : 9x Magic Pen Reds, 9x Armor Seals Yellow, 9x MR Blues, 3x Quint of Ability Power
+	Start : Doran's Ring, 2x Health Pot, Warding Totem
+	First Back: Boots of Speed, Doran's Ring #2, Vision Ward
+	Rush: Fiendish Codex, Ionian Boots of lucidity (Cooldown), Sheen
+	Core Items: Zhonya's HourGlass, Abyssal Scepter, Lichbane
+	Last items: Hextech GLP-800, VoidStaff
+	Masteries: 12,18,0 ; Thunderlord's Decree
+	Ability Sequence: Start Q; Max Q ,E,W and R when ever avaliable

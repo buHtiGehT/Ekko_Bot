@@ -1,0 +1,10 @@
+
+Summoner Spells: Flash, Ignite; Flash, Exhaust for immobile opponents
+	Runes : 9x Attack Speed Reds, 9x Scaling MR Blues, 9x Scaling Health Yellows, 3x attack speed quints
+	Start :  Doran's Blade + pot
+	First Back: Zeal + Boots or Dagger
+	Rush:  Statikk Shiv
+	Core Items: Statikk Shiv, Infinity Edge, Berserker's Greaves
+	Last items: Blood Thirsther, Guardian Angel, Lord Dominik's regards
+	Masteries: 18 12 0, Fervor
+	Ability Sequence: Start Q; Max E, Q, W and R when ever avaliable

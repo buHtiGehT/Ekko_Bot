@@ -1,0 +1,9 @@
+Summoner Spells: Flash, Ghost
+	Runes : 9x Magic Pen Reds, 6x Scaling CDR 3x Scaling AP Blues, 9x Scaling Health yellows, 3x AP Quints
+	Start : Doran's Shield Health Pot; Boots of Speed 5x pots/ biscuts 
+	First Back: Spectre's Cowl, boots of CDR
+	Rush: Spirit Visage, Hextech ProtoBelt
+	Core Items: Spirit Visage, ProtoBelt, Rylai's
+	Last items: Zhonya's hourglass, void staff, Rabadon's death cap
+	Masteries: 12 0 18, Strength of the Ages
+	Ability Sequence: Start Q, E, W; Max Q, E , W and R whenever avaliable

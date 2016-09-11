@@ -1,0 +1,9 @@
+Summoner Spells: Flash, Smite
+	Runes : 9x 1.7% attack speed reds, 9x  ability power blues, 9x armor yellows, 3x 4.95 ability power
+	Start : Hunter's Talisman , refillable
+	First Back: Jungelt item : Blue or white smite; boots
+	Rush: Jungle itm: Enchantment: Runic Echos
+	Core Items: Zhonyas's hourglass, dead man's plate, lich bane
+	Last items: abysall scepter, spirit visage
+	Masteries: 12, 0 ,18; Strength of the ages
+	Ability Sequence: Start w, q , then e ;
