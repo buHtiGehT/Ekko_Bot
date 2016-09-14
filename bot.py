@@ -8,10 +8,16 @@ import os
 import sys
 import re
 import logging
+import urllib.request
+import json
+import contextlib
+import re
+import webbrowser
 from datetime import timedelta
 from discord import utils
 from discord.voice_client import VoiceClient
 from discord.ext.commands.bot import _get_variable
+from bs4 import BeautifulSoup
 
 
 logging.basicConfig(level=logging.INFO)
@@ -79,6 +85,19 @@ async def on_message(message):
                         await bot.send_message(message.channel,"Come on! Show me something new!")
 
         await bot.process_commands(message)
+
+@bot.command(pass_context=True)
+async def test():
+        url ="http://champion.gg/champion/Ahri"
+        hdr = {'User-Agent': 'Mozilla/5.0'}
+        req = urllib.request.Request(url,headers=hdr)
+        page = urllib.request.urlopen(req)
+        soup = BeautifulSoup(page,  "html.parser")
+        msg = await bot.say("Getting a build")
+        links = soup.findAll('img', src=True)
+        for link in links:
+                await bot.say("http:" + link['src'])
+
 
 @bot.command(pass_context=True)
 async def check(ctx):
@@ -178,6 +197,23 @@ async def bug(ctx):
         with open(file,'a') as text_file:
                                 text_file.write('\n' + "The bug or issue is " + str(issue.content))
         await bot.say(aut.mention + "Thank you for your help!")
+
+@bot.command()
+async def cat():
+    """Cat."""
+    msg = await bot.say("Getting a cat...")
+    url = "http://random.cat/meow"
+    data = urllib.request.urlopen(url).read().decode('utf8')
+    catStr = json.loads(data)
+    await bot.edit_message(msg, catStr['file'])
+
+@bot.command(hidden=True)
+async def dog():
+    """Dog."""
+    msg = await bot.say("Getting a dog...")
+    url = "http://random.dog/woof"
+    data = urllib.request.urlopen(url).read().decode('utf8')
+    await bot.edit_message(msg, "http://random.dog/{}".format(data))
 
 @bot.command(pass_context=True)
 async def builds(ctx):
