@@ -13,6 +13,7 @@ import json
 import contextlib
 import re
 import webbrowser
+import py_gg
 from datetime import timedelta
 from discord import utils
 from discord.voice_client import VoiceClient
@@ -21,6 +22,7 @@ from bs4 import BeautifulSoup
 
 
 logging.basicConfig(level=logging.INFO)
+py_gg.init("64b31aa6b110e5476cb84a4f7bea7afc")
 
 bot = commands.Bot(command_prefix=('!'))
 
@@ -85,6 +87,20 @@ async def on_message(message):
                         await bot.send_message(message.channel,"Come on! Show me something new!")
 
         await bot.process_commands(message)
+
+@bot.command(pass_context=True)
+async def poop(ctx):
+        aut= ctx.message.author
+        channel = ctx.message.channel
+        await bot.say(aut.mention+"Give Me the champ you want a build for!")
+        champ =  await bot.wait_for_message(timeout=60, author=aut, channel=channel)
+        champ = str(champ.content)
+        print(champ)
+        #await bot.say(aut.mention+"Now give me the role")
+        #role = await bot.wait_for_message(timeout=60, author=aut, channel=channel)
+        mes = "{}".format(py_gg.champion.items(champ, starting=False))
+        print(mes)
+        await bot.say(aut.mention + mes)
 
 @bot.command(pass_context=True)
 async def test():
