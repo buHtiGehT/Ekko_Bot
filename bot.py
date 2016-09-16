@@ -15,6 +15,7 @@ import re
 import webbrowser
 import py_gg
 from datetime import timedelta
+from collections import defaultdict
 from discord import utils
 from discord.voice_client import VoiceClient
 from discord.ext.commands.bot import _get_variable
@@ -89,7 +90,7 @@ async def on_message(message):
         await bot.process_commands(message)
 
 @bot.command(pass_context=True)
-async def poop(ctx):
+async def builds(ctx):
         aut= ctx.message.author
         channel = ctx.message.channel
         await bot.say(aut.mention+"Give Me the champ you want a build for!")
@@ -98,22 +99,49 @@ async def poop(ctx):
         print(champ)
         #await bot.say(aut.mention+"Now give me the role")
         #role = await bot.wait_for_message(timeout=60, author=aut, channel=channel)
-        mes = "{}".format(py_gg.champion.items(champ, starting=False))
-        print(mes)
-        await bot.say(aut.mention + mes)
+        mes = py_gg.champion.items(champ, starting=True)
+        gg = " "
+        for i in mes[0]["items"]:
+            gg =  gg + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
+        
+        mes = py_gg.champion.items(champ, starting=False)
+        gg1 = " "
+        for i in mes[0]["items"]:
+            gg1 =  gg1 + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
+
+        mes = py_gg.champion.runes(champ)
+        gg2 = " "
+        rem = mes[0]["runes"]
+        for i in rem:
+                gg2 = gg2 + i["name"] + " " + "x"+ str(i["number"]) + "\n "
+
+        mem = py_gg.champion.specific(champ)
+        gg3 = " "
+        cem = mem[0]['skills']
+        tem = cem['highestWinPercent']
+        for i in tem["order"]:
+              gg3 = gg3 + "{}, ".format(i)
+        mem = py_gg.champion.specific("ekko")
+        cem = mem[0]['masteries']
+        tem = cem['highestWinPercent']
+        rem = tem['masteries']
+        gg4 = " "
+        for i in rem:
+             gg4 = gg4 + " "+  i['tree'] + " " + str(i['total'])
+        await bot.say(aut.mention + "Pming you the build!")
+        await bot.start_private_message(aut)
+        await bot.send_message(aut, "These are your starting Items" + gg + "This is your standard build path, starting with the top item" + gg1)
+        await bot.send_message(aut, "Here is the  runes"+ "\n" + gg2 + " " + "\n"  + "Here is the skill order"+ "\n" + gg3 + " " + "\n" + "Here is the mastery spread" + "\n" + gg4)
+        
+            
+ 
 
 @bot.command(pass_context=True)
 async def test():
-        url ="http://champion.gg/champion/Ahri"
-        hdr = {'User-Agent': 'Mozilla/5.0'}
-        req = urllib.request.Request(url,headers=hdr)
-        page = urllib.request.urlopen(req)
-        soup = BeautifulSoup(page,  "html.parser")
-        msg = await bot.say("Getting a build")
-        links = soup.findAll('img', src=True)
-        for link in links:
-                await bot.say("http:" + link['src'])
+      
+      print(gg)
 
+      
 
 @bot.command(pass_context=True)
 async def check(ctx):
@@ -231,212 +259,7 @@ async def dog():
     data = urllib.request.urlopen(url).read().decode('utf8')
     await bot.edit_message(msg, "http://random.dog/{}".format(data))
 
-@bot.command(pass_context=True)
-async def builds(ctx):
 
-                aut = ctx.message.author
-                channel = ctx.message.channel
-                
-                await bot.say(aut.mention + " State the  full champ name and lane you would like a build for")
-                
-                buildChoice = await bot.wait_for_message(timeout=60, author=aut, channel=channel)
-
-                #Ekko Builds                                                
-                if buildChoice.content == "ekko mid":
-                                await bot.say(aut.mention + " Preparing a build for: Ekko!")
-                                fileName =r".\builds\Ekko_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                                
-                elif buildChoice.content == "ekko top":
-                                await bot.say(aut.mention + " Preparing a build for: Ekko Top!")
-                                fileName =r".\builds\Ekko_Top.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-
-                elif buildChoice.content == "ekko jungle":
-                                await bot.say(aut.mention + " Preparing a build for : Ekko Jungle!")
-                                fileName =r".\builds\Ekko_Jungle.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-
-                #Yasuo Builds
-                elif buildChoice.content == "yasuo mid":
-                                await bot.say(aut.mention + " Preparing a build for : Yasuo Mid!")
-                                fileName =r".\builds\Yasuo_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "yasuo top":
-                                await bot.say(aut.mention + " Preparing a build for : Yasuo Top!")
-                                fileName =r".\builds\Yasuo_Top.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "yasuo jungle":
-                                await bot.say(aut.mention + " Preparing a build for : Yasuo Jungle!")
-                                fileName =r".\builds\Yasuo_Jungle.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                #Riven Builds
-
-                elif buildChoice.content == "riven top":
-                                await bot.say(aut.mention + " Preparing a build for : Riven Top/Mid!")
-                                fileName =r".\builds\Riven_Top.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "riven mid":
-                                await bot.say(aut.mention + " Preparing a build for : Riven Top/Mid!")
-                                fileName =r".\builds\Riven_Top.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-
-                elif buildChoice.content == "riven jungle":
-                                await bot.say(aut.mention + " Preparing a build for : Riven Jungle!")
-                                fileName =r".\builds\Riven_Jungle.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                #Aurelion Sol Builds
-                        
-                elif buildChoice.content == "aurelion sol mid":
-                                await bot.say(aut.mention + " Preparing a build for : Aurelion Sol Mid/Top!")
-                                fileName =r".\builds\Sol_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "aurelion sol jungle":
-                                await bot.say(aut.mention + " Preparing a build for : Aurelion Sol Jungle!")
-                                fileName =r".\builds\Sol_Jungle.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "aurelion sok top":
-                                await bot.say(aut.mention + " Preparing a build for : Aurelion Sol Top/Mid!")
-                                fileName =r".\builds\Sol_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                #Vladimir Builds
-
-                elif buildChoice.content == "vladimir mid":
-                                await bot.say(aut.mention + " Preparing a build for : Vladimir Mid!")
-                                fileName =r".\builds\Vlad_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "vladimir top":
-                                await bot.say(aut.mention + " Preparing a build for : Vladimir Top!")
-                                fileName =r".\builds\Vlad_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                #Zilean Builds
-                        
-                elif buildChoice.content == "zilean mid":
-                                await bot.say(aut.mention + " Preparing a build for : Zilean Mid!")
-                                fileName =r".\builds\Zilean_Mid.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-
-                        
-                elif buildChoice.content == "zilean support":
-                                await bot.say(aut.mention + " Preparing a build for : Zilean Support!")
-                                fileName =r".\builds\Zilean_Support.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                #Soraka Builds
-                        
-                elif buildChoice.content == "soraka support":
-                                await bot.say(aut.mention + " Preparing a build for : Soraka Support!")
-                                fileName =r".\builds\Soraka_Support.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                        
-                elif buildChoice.content == "soraka ad":
-                                await bot.say(aut.mention + " Preparing a build for : AD Soraka!")
-                                await bot.say(aut.mention + " You understand Soraka has no ad scaling...")
-                                await bot.say(aut.mention + " and is not that great... Oh well good luck!")
-                                fileName =r".\builds\Soraka_AD.txt"
-                                f = open(fileName,'r')
-                                file_contents = f.read()
-                                print(file_contents)
-                                await bot.say(aut.mention + file_contents)
-                                print("Build Complete!")
-                                return True
-                else:
-                        await bot.say(aut.mention + "A build for that does not exist in my database! Or you spelled something wrong!")
-                        print("Build Failed")
-                        print("Missing Build is " + str(buildChoice.content))
-                        file =r".\Errors.txt"
-                        with open(file,'a') as text_file:
-                                text_file.write('\n' + "Missing Build is " + str(buildChoice.content))
                         
 
 

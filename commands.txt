@@ -9,14 +9,7 @@ REGULAR COMMANDS:
 !Commands - displays a list of commands
 !Ekko - returns a random ekko quote to the user
 !bug - if there is a bug, you can use this to report it
+!dog- gives you a nice picture
+!cat-gives you nice picture
 !builds - use this to find a build for a champ
-Current Supported builds:
-- ekko mid, top , jungle
-- yasuo mid, top, jungle
-- riven top, mid, jungle
-- aurelion sol mid, top, jungle
-- vlad mid, top
-- zilean mid, support
-- soraka support
-If there is a build you are looking for but is not listed, just mention it 
-with the !builds command and it will be recorded and eventually added.
+	-Currrently only the primary roles are supported for each champ

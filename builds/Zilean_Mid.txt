@@ -1,9 +1,0 @@
-Summoner Spells: Flash Tp, Flash Exhaust
-	Runes : 9x Magic Pen Reds, 9x Scaling CDR Blues, 9x Scaling Health Yellows, 3x Quint of Ap
-	Start : Doran's Ring , 3 Health Pots
-	First Back: Catalyst -> Rod of Ages
-	Rush: Rod of Ages
-	Core Items: Rod of Ages, Morellonomicon, CDR boots
-	Last items: Rabadon's death cap, void staff, Guardian's angel
-	Masteries: 12 18 0, ThunderLord's Decree
-	Ability Sequence: Start Q, W, Q, E; Max Q, W, E and R whenever avaliable

@@ -1,9 +1,0 @@
-Summoner Spells: Flash, Tp; Flash ignite in a favorable matchup
-	Runes : 9x Attack Damage Reds, 9x CDR Blues, 9x Armor Yellows, 2x Quints of AD, 1x Quint of CDR
-	Start : Long sword, three pots
-	First Back: Phage or Caulfield's warhammer or Cooldown boots
-	Rush: Black cleaver + Youmuu's Ghostblade
-	Core Items: Black Cleaver, Death's Dance or Ravenous Hydra, Youmuu's Ghostblade
-	Last items: Guardian Angel, Mercurial Scimitar , Bloodthirster
-	Masteries: 12 18 0, ThunderLord's (Remember to Take the 41% CDR Mastery)
-	Ability Sequence: Start Q, then E , then W;  Max Q, E, W and R when avaliable
