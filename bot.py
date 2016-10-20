@@ -14,6 +14,7 @@ import contextlib
 import re
 import webbrowser
 import py_gg
+import datetime as dt 
 from datetime import timedelta
 from collections import defaultdict
 from discord import utils
@@ -93,7 +94,7 @@ async def on_message(message):
 async def builds(ctx):
         aut= ctx.message.author
         channel = ctx.message.channel
-        await bot.say(aut.mention+"Give Me the champ you want a build for!")
+        await bot.say(aut.mention+"Give Me the champ you want a build for! NOTICE YOU WILL GET THE BUILD FOR THE PRIMARY ROLE OF THE CHAMP")
         champ =  await bot.wait_for_message(timeout=60, author=aut, channel=channel)
         champ = str(champ.content)
         print(champ)
@@ -101,45 +102,64 @@ async def builds(ctx):
         #role = await bot.wait_for_message(timeout=60, author=aut, channel=channel)
         mes = py_gg.champion.items(champ, starting=True)
         gg = " "
-        for i in mes[0]["items"]:
-            gg =  gg + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
-        
-        mes = py_gg.champion.items(champ, starting=False)
-        gg1 = " "
-        for i in mes[0]["items"]:
-            gg1 =  gg1 + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
+        try:
+                for i in mes[0]["items"]:
+                    gg =  gg + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
+                
+                mes = py_gg.champion.items(champ, starting=False)
+                gg1 = " "
+                for i in mes[0]["items"]:
+                    gg1 =  gg1 + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
 
-        mes = py_gg.champion.runes(champ)
-        gg2 = " "
-        rem = mes[0]["runes"]
-        for i in rem:
-                gg2 = gg2 + i["name"] + " " + "x"+ str(i["number"]) + "\n "
+                mes = py_gg.champion.runes(champ)
+                gg2 = " "
+                rem = mes[0]["runes"]
+                for i in rem:
 
-        mem = py_gg.champion.specific(champ)
-        gg3 = " "
-        cem = mem[0]['skills']
-        tem = cem['highestWinPercent']
-        for i in tem["order"]:
-              gg3 = gg3 + "{}, ".format(i)
-        mem = py_gg.champion.specific("ekko")
-        cem = mem[0]['masteries']
-        tem = cem['highestWinPercent']
-        rem = tem['masteries']
-        gg4 = " "
-        for i in rem:
-             gg4 = gg4 + " "+  i['tree'] + " " + str(i['total'])
-        await bot.say(aut.mention + "Pming you the build!")
-        await bot.start_private_message(aut)
-        await bot.send_message(aut, "These are your starting Items" + gg + "This is your standard build path, starting with the top item" + gg1)
-        await bot.send_message(aut, "Here is the  runes"+ "\n" + gg2 + " " + "\n"  + "Here is the skill order"+ "\n" + gg3 + " " + "\n" + "Here is the mastery spread" + "\n" + gg4)
+                        gg2 = gg2 + i["name"] + " " + "x"+ str(i["number"]) + "\n "
+
+                mem = py_gg.champion.specific(champ)
+                gg3 = " "
+                cem = mem[0]['skills']
+                tem = cem['highestWinPercent']
+                for i in tem["order"]:
+                      gg3 = gg3 + "{}, ".format(i)
+                mem = py_gg.champion.specific("ekko")
+                cem = mem[0]['masteries']
+                tem = cem['highestWinPercent']
+                rem = tem['masteries']
+                gg4 = " "
+                for i in rem:
+                     gg4 = gg4 + " "+  i['tree'] + " " + str(i['total'])
+                await bot.say(aut.mention + "Pming you the build!")
+                await bot.start_private_message(aut)
+                await bot.send_message(aut, "These are your starting Items" + "\n"+ gg + "\n" + "This is your standard build path, starting with the top item" +"\n" + gg1)
+                await bot.send_message(aut, "Here is the  runes"+ "\n" + gg2 + " " + "\n"  + "Here is the skill order"+ "\n" + gg3 + " " + "\n" + "Here is the mastery spread" + "\n" + gg4)
+        except:
+                await bot.say(aut.mention + "An Error has occured please tell me what you did now! EX. If you typed in a champ that does not exist then mention that you did and specify the champ!")
+                issue = await bot.wait_for_message(timeout=60,author=aut, channel=channel)
+                file =r".\Errors.txt"
+                date = dt.date.today()
+                with open(file,'a') as text_file:
+                        text_file.write('\n' + str(date) + " The Error is " + str(issue.content))
+                await bot.say(aut.mention + "Thank you!")
         
             
  
 
 @bot.command(pass_context=True)
 async def test():
+      match =  py_gg.champion.matchup( "ekko", "Yasuo")
+      up = match[0]['games']
+      po= match[0]['winRate']
+      op= match[0]['statScore']
+      kk=match[0]['role']
+      up2 = match[1]['games']
+      po2= match[1]['winRate']
+      op2= match[1]['statScore']
+      kk2=match[1]['role']
+      print(str(up) + " " + str(up2))
       
-      print(gg)
 
       
 
@@ -147,7 +167,7 @@ async def test():
 async def check(ctx):
         aut = ctx.message.author
         channel = ctx.message.channel
-        bRole = utils.find( lambda r: r.name == "BotCom", channel.server.roles)
+        bRole = utils.find( lambda r: r.name == "EKKOBOT", channel.server.roles)
         if bRole in aut.roles:
                 await bot.say("Hi " + aut.mention)
                 print("Hi")
@@ -163,12 +183,12 @@ async def botrole(ctx):
         await bot.say( aut.mention + "Please enter the server's id. Notice that only the server owner will be able to do this!")
         serv = await bot.wait_for_message(timeout = 120, author=aut, channel=channel)
         serv = serv.server
-        roleName = 'BotCom'
+        roleName = 'EKKOBOT'
         await bot.create_role(serv)
         nRole = utils.find( lambda r: r.name == "new role", channel.server.roles)
         await bot.edit_role(serv, nRole, name=roleName, hoist= True)
         await bot.say(aut.mention + "Role Created!")
-        await bot.say(aut.mention + "The server owner will now be able to grant exclusive access to some of my special commands by adding the person to the new BotCom Role!"+"\n" + "Remember to pimp out the role and place other exclusive permissions if desired!")
+        await bot.say(aut.mention + "The server owner will now be able to grant exclusive access to some of my special commands by adding the person to the new EKKOBOT Role!"+"\n" + "Remember to pimp out the role and place other exclusive permissions if desired!")
 @asyncio.coroutine
 def logout():
          yield from bot.close()
@@ -193,7 +213,7 @@ async def commands(ctx):
 async def shutdown(ctx):
     aut = ctx.message.author
     channel = ctx.message.channel
-    bRole = utils.find( lambda r: r.name == "BotCom", channel.server.roles)
+    bRole = utils.find( lambda r: r.name == "EKKOBOT", channel.server.roles)
     if bRole in aut.roles:
                 await bot.say(aut.mention + "Cya, notice the bot will have to be restarted from the owner's computer... this will also turn me off on other discord servers!")
                 await bot.say(aut.mention + "if there is a bug please type: bug, then state the problem. If not just type anything")
@@ -202,8 +222,9 @@ async def shutdown(ctx):
                                         await bot.say(aut.mention + "Please state the issue right now!")
                                         issue = await bot.wait_for_message(timeout=60,author=aut, channel=channel)
                                         file =r".\bugs.txt"
+                                        date = dt.date.today()
                                         with open(file,'a') as text_file:
-                                                text_file.write('\n' + "The bug or issue is " + str(issue.content))
+                                                text_file.write('\n' + str(date) + " The bug or issue is " + str(issue.content))
                                         await bot.say(aut.mention + ":wave:")
                                         await bot.change_status(game=discord.Game(name='Offline, bot is broken'))
                                         await bot.say( aut.mention + "Preparing to Shut Down, abort with .abort")
@@ -238,8 +259,9 @@ async def bug(ctx):
         await bot.say(aut.mention + "Please tell me the issue by typing it in!")
         issue = await bot.wait_for_message(timeout=60,author=aut, channel=channel)
         file =r".\bugs.txt"
+        date = dt.date.today()
         with open(file,'a') as text_file:
-                                text_file.write('\n' + "The bug or issue is " + str(issue.content))
+                                text_file.write('\n' + str(date) + " The bug or issue is " + str(issue.content))
         await bot.say(aut.mention + "Thank you for your help!")
 
 @bot.command()
@@ -265,4 +287,4 @@ async def dog():
 
 
 
-bot.run("MjE3MDM0NTI2ODQzNjAwODk4.Cpuwsw.6enEptUU9FukjKWK-Ts3ZRLzmoM")
+bot.run("XD")
