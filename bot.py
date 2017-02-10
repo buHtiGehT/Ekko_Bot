@@ -92,79 +92,137 @@ async def on_message(message):
 
 @bot.command(pass_context=True)
 async def builds(ctx):
+        """ generate build for role of champ given"""
         aut= ctx.message.author
         channel = ctx.message.channel
-        await bot.say(aut.mention+"Give Me the champ you want a build for! NOTICE YOU WILL GET THE BUILD FOR THE PRIMARY ROLE OF THE CHAMP")
+        await bot.say(aut.mention+"Give Me the champ you want a build for! NOTICE YOU WILL GET THE MOST VIABLE BUILD FOR THE MOST VIABLE BUILD ACCORDING TO CHAMPION.GG")
         champ =  await bot.wait_for_message(timeout=60, author=aut, channel=channel)
         champ = str(champ.content)
         print(champ)
+        await bot.say(aut.mention + "Now state the role of the build you would like, notice that not all roles have viable builds...")
+        role = await bot.wait_for_message(timeout = 60, author = aut , channel =channel)
+        role = str(role.content)
         #await bot.say(aut.mention+"Now give me the role")
         #role = await bot.wait_for_message(timeout=60, author=aut, channel=channel)
-        mes = py_gg.champion.items(champ, starting=True)
-        gg = " "
-        try:
-                for i in mes[0]["items"]:
-                    gg =  gg + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
+        mes  = py_gg.champion.items(champ,starting = True)
+        for p in range(0,2):
+                try:
+                        if mes[p]["role"] == role:
+                                try:
+                                        gg = ""
+                                        for i in range(0, len(mes[p]["items"])):
+                                            gg =  gg + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(mes[p]["items"][i]) + " "
                 
-                mes = py_gg.champion.items(champ, starting=False)
-                gg1 = " "
-                for i in mes[0]["items"]:
-                    gg1 =  gg1 + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(i) + " "
+                                        mes = py_gg.champion.items(champ, starting=False)
+                                        gg1 = " "
+                                        for i in range(0,len(mes[p]["items"])):
+                                            gg1 =  gg1 + "http://ddragon.leagueoflegends.com/cdn/6.18.1/img/item/{}.png".format(mes[p]["items"][i]) + " "
 
-                mes = py_gg.champion.runes(champ)
-                gg2 = " "
-                rem = mes[0]["runes"]
-                for i in rem:
+                                        mes = py_gg.champion.runes(champ)
+                                        gg2 = " "
+                                     
+                                        rem = mes[p]["runes"]
+                                        for i in range(0, len(rem)):
 
-                        gg2 = gg2 + i["name"] + " " + "x"+ str(i["number"]) + "\n "
+                                                gg2 = gg2 + rem[i]["name"] + " " + "x"+ str(rem[i]["number"]) + "\n "
 
-                mem = py_gg.champion.specific(champ)
-                gg3 = " "
-                cem = mem[0]['skills']
-                tem = cem['highestWinPercent']
-                for i in tem["order"]:
-                      gg3 = gg3 + "{}, ".format(i)
-                mem = py_gg.champion.specific("ekko")
-                cem = mem[0]['masteries']
-                tem = cem['highestWinPercent']
-                rem = tem['masteries']
-                gg4 = " "
-                for i in rem:
-                     gg4 = gg4 + " "+  i['tree'] + " " + str(i['total'])
-                await bot.say(aut.mention + "Pming you the build!")
-                await bot.start_private_message(aut)
-                await bot.send_message(aut, "These are your starting Items" + "\n"+ gg + "\n" + "This is your standard build path, starting with the top item" +"\n" + gg1)
-                await bot.send_message(aut, "Here is the  runes"+ "\n" + gg2 + " " + "\n"  + "Here is the skill order"+ "\n" + gg3 + " " + "\n" + "Here is the mastery spread" + "\n" + gg4)
-        except:
-                await bot.say(aut.mention + "An Error has occured please tell me what you did now! EX. If you typed in a champ that does not exist then mention that you did and specify the champ!")
-                issue = await bot.wait_for_message(timeout=60,author=aut, channel=channel)
-                file =r".\Errors.txt"
-                date = dt.date.today()
-                with open(file,'a') as text_file:
-                        text_file.write('\n' + str(date) + " The Error is " + str(issue.content))
-                await bot.say(aut.mention + "Thank you!")
-        
-            
+                                        mem = py_gg.champion.specific(champ)
+                                        gg3 = " "
+                                        cem = mem[p]['skills']
+                                        tem = cem['highestWinPercent']
+                                        for i in range(0, len(tem["order"])):
+                                              gg3 = gg3 + "{}, ".format(tem["order"][i])
+                                        mem = py_gg.champion.specific(champ)
+                                        cem = mem[p]['masteries']
+                                        tem = cem['highestWinPercent']
+                                        rem = tem['masteries']
+                                        gg4 = " "
+                                        for i in range(0,len(rem)):
+                                             gg4 = gg4 + " "+  rem[i]['tree'] + " " + str(rem[i]['total'])
+                                        await bot.say(aut.mention + "Pming you the build!")
+                                        await bot.start_private_message(aut)
+                                        await bot.send_message(aut, "These are your starting Items" + "\n"+ gg + "\n" + "This is your standard build path, starting with the top item" +"\n" + gg1)
+                                        await bot.send_message(aut, "Here is the  runes"+ "\n" + gg2 + " " + "\n"  + "Here is the skill order"+ "\n" + gg3 + " " + "\n" + "Here is the mastery spread" + "\n" + gg4)
+                                except:
+                                        await bot.say(aut.mention + "An Error has occured please tell me what you did now! EX. If you typed in a champ that does not exist then mention that you did and specify the champ!")
+                                        issue = await bot.wait_for_message(timeout=60,author=aut, channel=channel)
+                                        file =r".\Errors.txt"
+                                        date = dt.date.today()
+                                        with open(file,'a') as text_file:
+                                                text_file.write('\n' + str(date) + " The Error is " + str(issue.content))
+                                        await bot.say(aut.mention + "Thank you!")
+                except:
+                        print("Error")
+                                
+                            
  
 
 @bot.command(pass_context=True)
-async def test():
-      match =  py_gg.champion.matchup( "ekko", "Yasuo")
-      up = match[0]['games']
-      po= match[0]['winRate']
-      op= match[0]['statScore']
-      kk=match[0]['role']
-      up2 = match[1]['games']
-      po2= match[1]['winRate']
-      op2= match[1]['statScore']
-      kk2=match[1]['role']
-      print(str(up) + " " + str(up2))
+async def matchup(ctx):
+      """generates statistics for matchup between two given champs"""
+      aut= ctx.message.author
+      channel = ctx.message.channel
+      await bot.say(aut.mention + "What is the first champ? (CASE SENSITIVE: FIRST LETTER OF WORD(S) HAVE TO BE CAPITAL)")
+      champ1 = await bot.wait_for_message( timeout=60, author=aut,channel=channel)
+      champ1 = champ1.content
+      await bot.say(aut.mention + "What is the second champ? (CASE SENSITIVE: FIRST LETTER OF WORD(S) HAVE TO BE CAPITAL)")
+      champ2 = await bot.wait_for_message( timeout=60, author=aut,channel=channel)
+      champ2 = champ2.content
+      match =  py_gg.champion.matchup(champ1,champ2)
+     
+      try:
+              up = match[0]['games']
+              po= match[0]['winRate']
+              op= match[0]['statScore']
+              kk=match[0]['role']
+              await bot.say(aut.mention + "For the Role: " + str(kk)+ ", "+ champ1 + " has a " + str(po) + " % winrate against "+ champ2 +" in " + str(up) + " games")
+              try:
+                      up2 = match[1]['games']
+                      po2= match[1]['winRate']
+                      op2= match[1]['statScore']
+                      kk2=match[1]['role']
+                      await bot.say(aut.mention + "For the Role: " + str(kk2)+ ", "+ champ1 + " has a " + str(po2) + " % winrate against "+ champ2 +" in " + str(up2) + " games")
+                      try:
+                              up3 = match[2]['games']
+                              po3= match[2]['winRate']
+                              op3= match[2]['statScore']
+                              kk3=match[2]['role']
+                              await bot.say(aut.mention + "For the Role: " + str(kk3)+ ", "+ champ1 + " has a " + str(po3) + " % winrate against "+ champ2 +" in " + str(up3) + " games")
+                              try:
+                                      up4 = match[3]['games']
+                                      po4= match[3]['winRate']
+                                      op4= match[3]['statScore']
+                                      kk4=match[3]['role']
+                                      await bot.say(aut.mention + "For the Role: " + str(kk4)+ ", "+ champ1 + " has a " + str(po4) + " % winrate against "+ champ2 +" in " + str(up4) + " games")
+                                      try:
+                                              up5 = match[4]['games']
+                                              po5= match[4]['winRate']
+                                              op5= match[4]['statScore']
+                                              kk5=match[4]['role']
+                                              await bot.say(aut.mention + "For the Role: " + str(kk5)+ ", "+ champ1 + " has a " + str(po5) + " % winrate against "+ champ2 +" in " + str(up5) + " games")
+                                      except:
+                                              print("there is only four matchups")
+                      
+                              except:
+                                      print("there is only three matchups")
+                              
+                      
+                      except:
+                              print("there is only two matchups")
+                      
+                      
+              except:
+                      print("there is only one match up")
+      except:
+                await bot.say(aut.mention + " " + "there are no matchups for these champs")
+             
       
 
       
 
 @bot.command(pass_context=True)
 async def check(ctx):
+        """ checks to see if user has exclusive command role"""
         aut = ctx.message.author
         channel = ctx.message.channel
         bRole = utils.find( lambda r: r.name == "EKKOBOT", channel.server.roles)
@@ -172,12 +230,14 @@ async def check(ctx):
                 await bot.say("Hi " + aut.mention)
                 print("Hi")
         else:
+                await bot.say(" user does not have role")
                 print("No")
-
-
+         
+                
  
 @bot.command(pass_context=True)
 async def botrole(ctx):
+        """For creating a role for exlcusive bot commands"""
         aut = ctx.message.author
         channel = ctx.message.channel
         await bot.say( aut.mention + "Please enter the server's id. Notice that only the server owner will be able to do this!")
@@ -196,11 +256,13 @@ def logout():
          
 @bot.command(pass_context=True)
 async def info(ctx):
+        """ Details about bot Version"""
         aut = ctx.message.author
         await bot.say(aut.mention + " Version Alpha 1.0 : " + "\n" + " Basic Commands and Beginning of Champ Builds")
 
 @bot.command(pass_context=True)
 async def commands(ctx):
+        """DMs the user the detailed command list."""
         aut = ctx.message.author
         await bot.say(aut.mention + " PMing you the Commands list!")
         file = r".\commands.txt"
@@ -211,6 +273,7 @@ async def commands(ctx):
 
 @bot.command(pass_context=True)
 async def shutdown(ctx):
+    """ Turns off bot"""
     aut = ctx.message.author
     channel = ctx.message.channel
     bRole = utils.find( lambda r: r.name == "EKKOBOT", channel.server.roles)
@@ -241,7 +304,7 @@ async def shutdown(ctx):
                                                 sys.exit()
          
                 else:
-                    await bot.say(aut.mention + ":wave:")
+                    await bot.say(aut.mention + " :wave:")
                     await bot.change_status(game=discord.Game(name=' I am Offline'))
                     me = discord.User(id="152643425894662146")
                     await bot.start_private_message(me)
@@ -254,6 +317,7 @@ async def shutdown(ctx):
     
 @bot.command(pass_context=True)
 async def bug(ctx):
+        """ for reporting bugs"""
         aut = ctx.message.author
         channel = ctx.message.channel
         await bot.say(aut.mention + "Please tell me the issue by typing it in!")
@@ -287,4 +351,4 @@ async def dog():
 
 
 
-bot.run("XD")
+bot.run("xd")
